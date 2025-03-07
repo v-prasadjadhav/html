@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: #f4f4f4;
+        }
+        #slider-container {
+            width: 500px;
+            height: 300px;
+            margin: auto;
+            position: relative;
+        }
+        #slider {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        #prev {
+            left: 10px;
+        }
+        #next {
+            right: 10px;
+        }
+        #image-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 18px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Image Slider</h2>
+    <div id="slider-container">
+        <button id="prev" class="nav-button" onclick="prevImage()">❮</button>
+        <a id="image-link" href="" target="_blank">
+            <img id="slider" src="" alt="Image Slider">
+        </a>
+        <button id="next" class="nav-button" onclick="nextImage()">❯</button>
+    </div>
+    
+    <script>
+        const images = [
+            { url: "faceBook.jpeg", link: "https://www.facebook.com/" },
+            { url: "instagram.webp", link: "https://www.instagram.com/" },
+            { url: "whatsup.webp", link: "https://web.whatsapp.com/" },
+            { url: "linkedin.jpeg", link: "https://www.linkedin.com/" }
+        ];
+        let currentIndex = 0;
+
+        function updateImage() {
+            document.getElementById("slider").src = images[currentIndex].url;
+            document.getElementById("image-link").href = images[currentIndex].link;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+            updateImage();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+            updateImage();
+        }
+
+        window.onload = updateImage;
+    </script>
+</body>
+</html>

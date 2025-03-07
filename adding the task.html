@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: url('https://source.unsplash.com/1600x900/?nature,landscape') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            margin-left: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Simple To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <input type="datetime-local" id="taskTime">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+    
+    <script>
+        function addTask() {
+            let taskInput = document.getElementById("taskInput");
+            let taskTime = document.getElementById("taskTime");
+            let taskText = taskInput.value.trim();
+            let taskTimeValue = taskTime.value;
+            
+            if (taskText === "" || taskTimeValue === "") return;
+            
+            let li = document.createElement("li");
+            li.textContent = `${taskText} (Due: ${new Date(taskTimeValue).toLocaleString()})`;
+            
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.onclick = function() {
+                li.remove();
+            };
+            
+            li.appendChild(removeBtn);
+            document.getElementById("taskList").appendChild(li);
+            taskInput.value = "";
+            taskTime.value = "";
+        }
+    </script>
+</body>
+</html>
+
